@@ -5,14 +5,27 @@
   become: yes
   become_method: sudo
 
+  vars:
+  - acng_user: someuser
+  - acng_pass: 1234testpass
+
   roles:
-  - { role: aptproxy } 
+  - { role: server-aptproxy }
 
-- host: aptproxy_client
+- hosts: aptproxyclient
+  user: vagrant
+  become: yes
 
+  vars:
+  - acng_port: 9999
+
+  tasks:
   - name: wait for connectivity
-    wait_for: host=aptproxy port=9999 delay=10 state=started
-    
+    wait_for: host=aptproxy port={{ acng_port }} delay=10 state=started
+
+  - name: apt config
+    template: src=templates/90proxy.j2 dest=/etc/apt/apt.conf.d/90proxy
+
   - name: update cache
     command: apt-get update
     
