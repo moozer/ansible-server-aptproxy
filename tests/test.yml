@@ -18,6 +18,7 @@
 
   vars:
   - acng_port: 9999
+  - acng_html: acng-report.html
 
   tasks:
   - name: wait for connectivity
@@ -29,4 +30,9 @@
   - name: update cache
     command: apt-get update
     
+  - name: check web site
+    command: wget http://aptproxy:{{ acng_port }}/{{ acng_html }}
+    
+  - name: wait for connectivity
+    wait_for: host=aptproxy port=80 delay=10 state=started
     

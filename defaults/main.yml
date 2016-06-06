@@ -3,3 +3,5 @@ acng_user: ""
 acng_pass: ""
 acng_port: 9999
 acng_html: acng-report.html
+
+include_web: true
