@@ -3,6 +3,9 @@
   with_items:
   - lighttpd
 
+- name: update cache
+  apt: update_cache=yes
+
 - name: install bandwidthd
   apt: name=bandwidthd state=present
   
