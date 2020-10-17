@@ -16,18 +16,6 @@ Remap-slrep:  file:sl_mirrors # Scientific Linux
 ReportPage: {{ acng_html }}
 ExTreshold: 4
 
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
+{% if acng_https_passtrough_domains is defined %}
+PassThroughPattern: ({{ acng_https_passtrough_domains|join('|') }}):443$
+{% endif %}
