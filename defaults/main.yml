@@ -7,7 +7,7 @@ acng_html: acng-report.html
 include_web: true
 
 # if set, "PassThroughPattern" will be set.
-#acng_https_passtrough_domains:
-#- somedomain
-#- somemore
+# acng_https_passtrough_domains:
+# - somedomain
+# - somemore
 #

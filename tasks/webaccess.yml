@@ -1,10 +1,10 @@
-- name: install web
+- name: Install web
   apt: name={{ item }} state=present
   with_items:
   - lighttpd
 
-- name: install bandwidthd
+- name: Install bandwidthd
   apt: name=bandwidthd state=present
-  
-- name: add bandwidthd symlink
+
+- name: Add bandwidthd symlink
   file: state=link src=../../lib/bandwidthd/htdocs dest=/var/www/html/bandwidthd

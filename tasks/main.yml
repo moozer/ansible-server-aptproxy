@@ -1,29 +1,28 @@
 # installs the apt proxy
 
-- name: install apt proxy packages
-  apt: name={{item}} state=present
+- name: Install apt proxy packages
+  apt: name={{ item }} state=present
   with_items:
   - apt-cacher-ng
   tags:
     - apt-proxy
 
-- name: install apt-cacher-ng template
+- name: Install apt-cacher-ng template
   template: src=acng.conf.j2 dest=/etc/apt-cacher-ng/acng.conf
             owner=root group=root mode=0644
   notify: restart apt-cacher-ng
   tags:
     - apt-proxy
 
-- name: security settings
+- name: Security settings
   template: src=security.conf.j2 dest=/etc/apt-cacher-ng/security.conf
             owner=root group=apt-cacher-ng mode=0640
   notify: restart apt-cacher-ng
   tags:
     - apt-proxy
 
-- name: include web acces
-  include: webaccess.yml
+- name: Include web acces
+  import_tasks: webaccess.yml
   when: include_web
   tags:
     - apt-proxy
-  
