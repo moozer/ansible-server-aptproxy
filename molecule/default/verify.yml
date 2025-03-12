@@ -5,6 +5,7 @@
 
   vars:
     aptproxy: test-aptproxy
+    aptproxy_w_web: test-aptproxy-w-web
 
   tasks:
     - name: Wait for connectivity on aptproxy port
@@ -28,20 +29,18 @@
       ansible.builtin.apt:
         update_cache: true
 
-    # - name: Check web site
-    #   ansible.builtin.uri:
-    #     url: "http://{{ aptproxy }}:{{ acng_port }}/{{ acng_html }}"
+    # check special case with web server enabled
+    - name: Check web site
+      ansible.builtin.uri:
+        url: "http://{{ aptproxy_w_web }}:{{ acng_port }}/{{ acng_html }}"
 
-    # - name: Wait for web server to be up
-    #   ansible.builtin.wait_for:
-    #     host: "{{ aptproxy }}"
-    #     port: "80"
-    #     delay: "10"
-    #     state: started
+    - name: Wait for web server to be up
+      ansible.builtin.wait_for:
+        host: "{{ aptproxy_w_web }}"
+        port: "80"
+        delay: "10"
+        state: started
 
-    # - name: Check bandwidthd availability
-    #   ansible.builtin.uri:
-    #     url: "http://{{ aptproxy }}/bandwidthd"
-    #     return_content: true
-    #   register: bw_uri_return
-    #   failed_when: bw_uri_return is failed or "'bandwidthd' not in bw_uri_return.content"
+    - name: Check bandwidthd availability
+      ansible.builtin.uri:
+        url: "http://{{ aptproxy_w_web }}/bandwidthd"

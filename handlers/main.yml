@@ -3,3 +3,13 @@
   ansible.builtin.service:
     name: apt-cacher-ng
     state: restarted
+
+- name: Restart webserver
+  ansible.builtin.service:
+    name: lighttpd
+    state: restarted
+
+- name: Restart bandwidthd
+  ansible.builtin.service:
+    name: bandwidthd
+    state: restarted

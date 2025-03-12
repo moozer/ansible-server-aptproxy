@@ -3,14 +3,17 @@
   ansible.builtin.apt:
     name: lighttpd
     state: present
+  notify: Restart webserver
 
 - name: Install bandwidthd
   ansible.builtin.apt:
     name: bandwidthd
     state: present
+  notify: Restart bandwidthd
 
 - name: Add bandwidthd symlink
   ansible.builtin.file:
     state: link
     src: ../../lib/bandwidthd/htdocs
     dest: /var/www/html/bandwidthd
+

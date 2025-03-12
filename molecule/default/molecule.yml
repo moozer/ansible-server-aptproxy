@@ -13,6 +13,17 @@ platforms:
     privileged: true
     networks:
       - name: test-aptproxy
+  - name: test-aptproxy-w-web
+    image: geerlingguy/docker-debian12-ansible:latest
+    pre_build_image: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    # it is a test container, so privileged is probably ok
+    privileged: true
+    networks:
+      - name: test-aptproxy
   - name: test-client
     image: geerlingguy/docker-debian12-ansible:latest
     pre_build_image: true
