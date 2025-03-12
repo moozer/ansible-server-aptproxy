@@ -1,6 +1,5 @@
 ---
 dependencies: []
-
 galaxy_info:
   role_name: aptproxy
   author: moozer
@@ -16,4 +15,4 @@ galaxy_info:
       versions:
         - all
   galaxy_tags:
-    - apt-cacher-ng
+    - apt

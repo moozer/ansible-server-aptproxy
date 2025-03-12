@@ -1,0 +1,33 @@
+---
+- name: Converge all
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Update cache
+      ansible.builtin.apt:
+        cache_valid_time: 3600
+        update_cache: true
+
+- name: Converge aptproxy
+  hosts: test-aptproxy*
+  gather_facts: false
+
+  roles:
+    - { role: moozer.aptproxy }
+
+  tasks:
+    - name: Replace this task with one that validates your content
+      ansible.builtin.debug:
+        msg: "This is the effective test"
+
+    # - name: Wait for connectivity on aptproxy port
+    #   ansible.builtin.uri:
+    #     url: "http://localhost:{{ acng_port }}"
+    #     return_content: true
+    #     status_code:
+    #       - 406
+    #   until: uri_return.status == 406
+    #   retries: 24 # Retries for 24 * 5 seconds = 120 seconds = 2 minutes
+    #   delay: 10 # Every 5 seconds
+    #   register: uri_return

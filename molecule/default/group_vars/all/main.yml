@@ -1,0 +1,10 @@
+---
+ansible_user: root
+
+acng_user: admin
+acng_pass: "{{ lookup('ansible.builtin.password', './cache/{{ inventory_hostname }}_{{ ansible_user }}_password', chars=['ascii_letters']) }}"
+acng_port: 9999
+
+acng_html: acng-report.html
+
+include_web: false
