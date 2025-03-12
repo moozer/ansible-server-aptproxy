@@ -7,4 +7,4 @@ acng_port: 9999
 
 acng_html: acng-report.html
 
-include_web: false
+aptprocy_include_web: false

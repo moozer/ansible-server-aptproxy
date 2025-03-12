@@ -32,6 +32,6 @@
 
 - name: Include web acces
   ansible.builtin.import_tasks: webaccess.yml
-  when: include_web
+  when: aptprocy_include_web
   tags:
     - apt-proxy

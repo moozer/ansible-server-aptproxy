@@ -5,7 +5,7 @@ acng_pass: ""
 acng_port: 9999
 acng_html: acng-report.html
 
-include_web: true
+aptprocy_include_web: true
 
 # if set, "PassThroughPattern" will be set.
 # acng_https_passtrough_domains:
