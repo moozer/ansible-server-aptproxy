@@ -1,0 +1,22 @@
+---
+- name: Converge all
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Update cache
+      ansible.builtin.apt:
+        cache_valid_time: 3600
+        update_cache: true
+
+- name: Converge aptproxy
+  hosts: test-aptproxy*
+  gather_facts: false
+
+  roles:
+    - { role: moozer.aptproxy }
+
+  tasks:
+    - name: Do nothing task
+      ansible.builtin.debug:
+        msg: "just a do-nothing task"

@@ -1,0 +1,47 @@
+---
+- name: Verify aptproxy
+  hosts: test-client
+  become: true
+
+  vars:
+    aptproxy: test-aptproxy
+
+  tasks:
+    - name: Wait for connectivity on aptproxy port
+      ansible.builtin.uri:
+        url: "http://{{ aptproxy }}:{{ acng_port }}"
+        return_content: true
+        status_code:
+          - 406
+      until: uri_return.status == 406
+      retries: 24 # Retries for 24 * 5 seconds = 120 seconds = 2 minutes
+      delay: 10 # Every 5 seconds
+      register: uri_return
+
+    - name: Apt config
+      ansible.builtin.template:
+        src: templates/90proxy.j2
+        dest: /etc/apt/apt.conf.d/90proxy
+        mode: "0644"
+
+    - name: Update cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    # - name: Check web site
+    #   ansible.builtin.uri:
+    #     url: "http://{{ aptproxy }}:{{ acng_port }}/{{ acng_html }}"
+
+    # - name: Wait for web server to be up
+    #   ansible.builtin.wait_for:
+    #     host: "{{ aptproxy }}"
+    #     port: "80"
+    #     delay: "10"
+    #     state: started
+
+    # - name: Check bandwidthd availability
+    #   ansible.builtin.uri:
+    #     url: "http://{{ aptproxy }}/bandwidthd"
+    #     return_content: true
+    #   register: bw_uri_return
+    #   failed_when: bw_uri_return is failed or "'bandwidthd' not in bw_uri_return.content"

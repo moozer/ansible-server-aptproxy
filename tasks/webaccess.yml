@@ -1,10 +1,16 @@
+---
 - name: Install web
-  apt: name={{ item }} state=present
-  with_items:
-  - lighttpd
+  ansible.builtin.apt:
+    name: lighttpd
+    state: present
 
 - name: Install bandwidthd
-  apt: name=bandwidthd state=present
+  ansible.builtin.apt:
+    name: bandwidthd
+    state: present
 
 - name: Add bandwidthd symlink
-  file: state=link src=../../lib/bandwidthd/htdocs dest=/var/www/html/bandwidthd
+  ansible.builtin.file:
+    state: link
+    src: ../../lib/bandwidthd/htdocs
+    dest: /var/www/html/bandwidthd

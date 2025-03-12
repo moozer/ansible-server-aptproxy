@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ansible-lint
+        name: ansible-lint
+        entry: ansible-lint
+        language: system
+        types: [file]
+        files: \.(yml|yaml)$
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck
+        language: system
+        types: [file]
+        files: \.sh$
