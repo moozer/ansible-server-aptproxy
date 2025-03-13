@@ -5,6 +5,14 @@
     state: present
   notify: Restart webserver
 
+- name: Add default index page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: "0644"
+    owner: www-data
+    group: www-data
+
 - name: Install bandwidthd
   ansible.builtin.apt:
     name: bandwidthd
@@ -16,4 +24,3 @@
     state: link
     src: ../../lib/bandwidthd/htdocs
     dest: /var/www/html/bandwidthd
-

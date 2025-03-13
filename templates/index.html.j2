@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to {{ inventory_hostname }}</title>
+  </head>
+  <body>
+    <h1>Local links</h1>
+    <ul>
+        <li><a href="http://{{ inventory_hostname }}:{{ acng_port }}/{{ acng_html }}">Apt-cache-ng report page</a></li>
+        <li><a href="bandwidthd">Bandwidth usage</a></li>
+    </ul>
+  </body>
+</html>
