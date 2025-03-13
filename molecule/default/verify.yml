@@ -41,6 +41,13 @@
         delay: "10"
         state: started
 
+    - name: Check welcome page
+      ansible.builtin.uri:
+        url: "http://{{ aptproxy_w_web }}"
+        return_content: true
+      register: index_return
+      failed_when: (index_return.status != 200) or (index_return.content is not search( aptproxy_w_web ))
+
     - name: Check bandwidthd availability
       ansible.builtin.uri:
         url: "http://{{ aptproxy_w_web }}/bandwidthd"
