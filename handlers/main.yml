@@ -1,2 +1,18 @@
+---
 - name: Restart apt-cacher-ng
-  service: name=apt-cacher-ng state=restarted
+  become: true
+  ansible.builtin.service:
+    name: apt-cacher-ng
+    state: restarted
+
+- name: Restart webserver
+  become: true
+  ansible.builtin.service:
+    name: lighttpd
+    state: restarted
+
+- name: Restart bandwidthd
+  become: true
+  ansible.builtin.service:
+    name: bandwidthd
+    state: restarted

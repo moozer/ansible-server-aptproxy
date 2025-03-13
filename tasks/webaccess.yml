@@ -1,10 +1,26 @@
+---
 - name: Install web
-  apt: name={{ item }} state=present
-  with_items:
-  - lighttpd
+  ansible.builtin.apt:
+    name: lighttpd
+    state: present
+  notify: Restart webserver
+
+- name: Add default index page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: "0644"
+    owner: www-data
+    group: www-data
 
 - name: Install bandwidthd
-  apt: name=bandwidthd state=present
+  ansible.builtin.apt:
+    name: bandwidthd
+    state: present
+  notify: Restart bandwidthd
 
 - name: Add bandwidthd symlink
-  file: state=link src=../../lib/bandwidthd/htdocs dest=/var/www/html/bandwidthd
+  ansible.builtin.file:
+    state: link
+    src: ../../lib/bandwidthd/htdocs
+    dest: /var/www/html/bandwidthd

@@ -1,10 +1,11 @@
+---
 # acng control vars
-acng_user: ""
-acng_pass: ""
+acng_user: admin
+# acng_pass: "" # No default. Must be set
 acng_port: 9999
 acng_html: acng-report.html
 
-include_web: true
+aptproxy_include_web: true
 
 # if set, "PassThroughPattern" will be set.
 # acng_https_passtrough_domains:
