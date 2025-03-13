@@ -14,7 +14,7 @@
   gather_facts: false
 
   roles:
-    - { role: moozer.aptproxy }
+    - moozer.server_aptproxy
 
   tasks:
     - name: Do nothing task

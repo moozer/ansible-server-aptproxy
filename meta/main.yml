@@ -1,7 +1,7 @@
 ---
 dependencies: []
 galaxy_info:
-  role_name: aptproxy
+  role_name: server_aptproxy
   author: moozer
   description: aptproxy functionality using apt-cacher-ng
 
